@@ -14,7 +14,7 @@ python3.7 -m pip install -U my-happy-graphviz
 
 or
 
-python3.7 -m pip install -i https://pypi.org/simple/ -U my-happy-jupyter-graphviz
+python3.7 -m pip install -i https://pypi.org/simple/ -U my-happy-graphviz
 
 
 ```
