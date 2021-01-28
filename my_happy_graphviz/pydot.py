@@ -1135,7 +1135,11 @@ class Graph(Common):
         None.
         """
 
-        if not isinstance(graph_node, Node):
+        if isinstance(graph_node, str_type):
+            graph_node = Node(graph_node)
+
+        if not isinstance(graph_node, Node) and \
+           not isinstance(graph_node, str_type):
             raise TypeError(
                 'add_node() received ' +
                 'a non node class object: ' + str(graph_node))
@@ -1269,6 +1273,17 @@ class Graph(Common):
 
         graph_edge.set_parent_graph( self.get_parent_graph() )
 
+
+    def add_edge_str(self, src, target):
+        if isinstance(src, str_type) and \
+           isinstance(target, str_type):
+
+            graph_edge = Edge(src, target)
+            self.add_edge(graph_edge)
+        else:
+            raise TypeError(
+                'if add_edge() with two arguments, they have to be str type'
+            )
 
 
     def del_edge(self, src_or_list, dst=None, index=None):
