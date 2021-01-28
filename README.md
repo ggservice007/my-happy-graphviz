@@ -2,6 +2,11 @@
 
 This project is based on [pydot](https://github.com/pydot/pydot).
 
+## 1.4.6
+1. Now add_node supports str type for pydot.
+1. Add add_edge_str method for pydot.
+
+
 
 ## test and developing environment
 OS: centos7
