@@ -1800,6 +1800,9 @@ class Dot(Graph):
         self.prog = prog
 
 
+    def draw(self, path, prog=None, format='svg', encoding="UTF-8"):
+        self.write(path, prog, format, encoding)
+
     def write(self, path, prog=None, format='raw', encoding=None):
         """Writes a graph to a file.
 
