@@ -1127,7 +1127,6 @@ class Graph(Common):
         return seq
 
 
-
     def add_node(self, graph_node):
         """Adds a node object to the graph.
 
@@ -1162,6 +1161,19 @@ class Graph(Common):
 
         graph_node.set_sequence(self.get_next_sequence_number())
 
+
+    def make_node(
+            self,
+            name: str,
+            shape: str
+        ) -> Node:
+        """
+        make_node with name and shape
+        """
+        cur_node = Node(name)
+        cur_node.set_shape(shape)
+        self.add_node(cur_node)
+        return cur_node
 
 
     def del_node(self, name, index=None):
@@ -1274,16 +1286,45 @@ class Graph(Common):
         graph_edge.set_parent_graph( self.get_parent_graph() )
 
 
-    def add_edge_str(self, src, target):
+    def add_edge_str(
+            self,
+            src: str_type,
+            target: str_type) -> Edge:
+        """
+        Add a edge with src and targe in string format.
+        """
+
         if isinstance(src, str_type) and \
            isinstance(target, str_type):
 
             graph_edge = Edge(src, target)
             self.add_edge(graph_edge)
+            return graph_edge
         else:
             raise TypeError(
                 'if add_edge() with two arguments, they have to be str type'
             )
+
+
+    def make_link(
+            self,
+            src_node: Node,
+            target_node: Node,
+            label: str = None,
+            width: float = 1,
+            style: str = 'solid'
+        ) -> Edge:
+        """
+        Add a edge with default properties, label=None, width=1, style='solid'
+        """
+        cur_edge = Edge(src_node, target_node)
+        cur_edge.set_penwidth(width)
+        cur_edge.set_style(style)
+        if label is not None:
+            cur_edge.set_label(label)
+        self.add_edge(cur_edge)
+        return cur_edge
+
 
 
     def del_edge(self, src_or_list, dst=None, index=None):
