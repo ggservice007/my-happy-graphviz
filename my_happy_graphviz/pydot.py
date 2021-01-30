@@ -269,6 +269,19 @@ def quote_if_necessary(s):
     return s
 
 
+def quotes_property(props):
+    for item_key in props.keys():
+        item_value = props[item_key]
+        if not isinstance(item_value, str):
+            continue
+
+        if not item_value:
+            continue
+
+        if ':' in item_value and '"' not in item_value:
+            item_value = '"' + item_value + '"'
+
+        props[item_key] = item_value
 
 def graph_from_dot_data(s):
     """Load graphs from DOT description in string `s`.
@@ -410,6 +423,9 @@ def graph_from_incidence_matrix(matrix, node_prefix='', directed=False):
     return graph
 
 
+
+
+
 class Common(object):
     """Common information to several classes.
 
@@ -491,8 +507,9 @@ class Common(object):
 
         which are defined for all the existing attributes.
         """
-
         self.obj_dict['attributes'][name] = value
+
+        quotes_property(self.obj_dict['attributes'])
 
 
     def get(self, name):
@@ -615,6 +632,8 @@ class Node(Common):
             self.obj_dict['name'] = quote_if_necessary(name)
             self.obj_dict['port'] = port
 
+        quotes_property(self.obj_dict['attributes'])
+
         self.create_attribute_methods(NODE_ATTRIBUTES)
 
     def __str__(self):
@@ -734,6 +753,9 @@ class Edge(Common):
             self.obj_dict[ 'sequence' ] = None
         else:
             self.obj_dict = obj_dict
+
+        quotes_property(self.obj_dict['attributes'])
+
         self.create_attribute_methods(EDGE_ATTRIBUTES)
 
     def __str__(self):
@@ -953,6 +975,8 @@ class Graph(Common):
 
             self.set_parent_graph(self)
 
+
+        quotes_property(self.obj_dict['attributes'])
 
         self.create_attribute_methods(GRAPH_ATTRIBUTES)
 

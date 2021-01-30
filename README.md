@@ -9,6 +9,13 @@ OS: centos7
 python:  3.7.7
 
 ## install
+
+### CentOS7
+```shell
+yum install graphviz graphviz-devel
+```
+
+
 ```shell
 python3.7 -m pip install -U my-happy-graphviz
 
