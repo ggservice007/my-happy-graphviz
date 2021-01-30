@@ -34,3 +34,6 @@ python3.7 -m pip uninstall my-happy-graphviz
 
 ## how to use
 See the examples directory in the project.
+
+## notice
+This version can not support the prog='sfdp'.
