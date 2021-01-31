@@ -16,7 +16,7 @@ from . import version
 __version__ = version.current_version
 
 try:
-    import my_happy_graphviz.dot_parser
+    from my_happy_graphviz import dot_parser
 except Exception as e:
     warnings.warn(
         "Couldn't import my_happy_graphviz.dot_parser, "
@@ -2039,3 +2039,15 @@ class Dot(Graph):
             )
 
         return stdout_data
+
+
+def graph_from_dot_data_one(s: str) -> Dot:
+    """Load graph from DOT description in string `s`.
+
+    @param s: string in [DOT language](
+        https://en.wikipedia.org/wiki/DOT_(graph_description_language))
+
+    @return: Graphs that result from parsing.
+    @rtype: pydot.Dot`
+    """
+    return dot_parser.parse_dot_data(s)[0]

@@ -17,9 +17,10 @@ from pyparsing import (
     restOfLine, cStyleComment, nums, alphanums,
     printables,
     ParseException, ParseResults, CharsNotIn,
-    QuotedString)
+    QuotedString
+)
 
-import my_happy_graphviz.pydot
+from my_happy_graphviz import pydot
 
 from . import version
 
